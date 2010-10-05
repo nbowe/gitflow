@@ -17,7 +17,8 @@ if [ -z "$REPO_NAME" ] ; then
 fi
 
 if [ -z "$REPO_HOME" ] ; then
-	REPO_HOME="http://github.com/nvie/gitflow.git"
+	#REPO_HOME="http://github.com/nvie/gitflow.git"
+	REPO_HOME="http://github.com/nbowe/gitflow.git"
 fi
 
 EXEC_FILES="git-flow"
@@ -56,16 +57,15 @@ case "$1" in
 			echo "Cloning repo from GitHub to $REPO_NAME"
 			git clone "$REPO_HOME" "$REPO_NAME"
 		fi
-		if [ -f "$REPO_NAME/$SUBMODULE_FILE" ] ; then
-			echo "Submodules look up to date"
-		else
-			echo "Updating submodules"
-			lastcwd=$PWD
-			cd "$REPO_NAME"
-			git submodule init
-			git submodule update
-			cd "$lastcwd"
-		fi
+
+		echo "Updating submodules"
+		lastcwd=$PWD
+		cd "$REPO_NAME"
+		git submodule init
+		git submodule update
+		cp -f shFlags/src/shflags $SUBMODULE_FILE
+		cd "$lastcwd"
+
 		install -v -d -m 0755 "$INSTALL_PREFIX"
 		for exec_file in $EXEC_FILES ; do
 			install -v -m 0755 "$REPO_NAME/$exec_file" "$INSTALL_PREFIX"
