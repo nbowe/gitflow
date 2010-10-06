@@ -69,9 +69,9 @@ main() {
 
 	# use the shFlags project to parse the command line arguments
 	. "$GITFLOW_DIR/gitflow-shFlags"
-	FLAGS_PARENT="git flow"
-	FLAGS "$@" || exit $?
-	eval set -- "${FLAGS_ARGV}"
+	#FLAGS_PARENT="git flow"
+	#FLAGS "$@" || exit $?
+	#eval set -- "${FLAGS_ARGV}"
 
 	# sanity checks
 	SUBCOMMAND="$1"; shift
